@@ -1,25 +1,36 @@
-const Navbar = () => {
-  return (
-    <nav class="navbar navbar-light bg-light ">
-      <a class="navbar-brand" href="#">
-        Navbar
-      </a>
+import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
+import NProgess from 'nprogress';
 
-      <ul class="nav">
-        <li class="nav-item active">
-          <a class="nav-link text-dark" href="#">
-            Home
-          </a>
+Router.onRouteChangeStart = () => NProgess.start();
+Router.onRouteChangeComplete = () => NProgess.done();
+
+const Navbar = () => {
+  const router = useRouter();
+
+  const isActive = route => {
+    return route === router.pathname;
+  };
+
+  return (
+    <nav className="navbar bg-dark ">
+      <a className="navbar-brand text-light">App</a>
+
+      <ul className="nav">
+        <li className="nav-item active">
+          <Link href="/">
+            <a className="nav-link text-light">Home</a>
+          </Link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="#">
-            Features
-          </a>
+        <li className="nav-item">
+          <Link href="/login">
+            <a className="nav-link text-light">Login</a>
+          </Link>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link text-dark" href="#">
-            Pricing
-          </a>
+        <li className="nav-item ">
+          <Link href="/register">
+            <a className="nav-link text-light">Register</a>
+          </Link>
         </li>
       </ul>
     </nav>

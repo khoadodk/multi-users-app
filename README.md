@@ -8,8 +8,8 @@ Tech stack: Next.js, Node.js, Express, AWS S3, AWS SES, AWS EC2, AWS Route 53, A
 
 1. User
 
-- Register
-- Account Activation
+- <del>Register</del>
+- <del>Account Activation</del>
 - Login
 - Forgot/Reset Password
 - Submit/Update/Delete Links
@@ -25,12 +25,12 @@ Tech stack: Next.js, Node.js, Express, AWS S3, AWS SES, AWS EC2, AWS Route 53, A
 
 1. Models
 
-- User
+- <del>User</del>
 - Categories
 - Links
 
 2. Controllers
 
-- Users: login, register, email confirmation, forgotPassword, resetPassword
+- Users: login, <del>register</del>, <del>email confirmation</del>, forgotPassword, resetPassword
 - Categories: all categories, single categories, CRUD categories, image upload to AWS S3
 - Links: all links, single link, CRUD links

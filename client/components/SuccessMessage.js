@@ -1,6 +1,6 @@
 const SuccessMessage = ({ success }) => {
   return (
-    <div class="alert alert-success">
+    <div className="alert alert-success">
       <strong>{success}</strong>
     </div>
   );

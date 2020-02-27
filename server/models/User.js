@@ -59,7 +59,7 @@ UserSchema.virtual('password')
 UserSchema.methods = {
   //compare the input password to the hashed password in the server
   authenticate: function(plainText) {
-    return bcrypt.compareSync(plainText) === this.hashed_password;
+    return bcrypt.compareSync(plainText, this.hashed_password);
   },
 
   encryptPassword: function(password) {

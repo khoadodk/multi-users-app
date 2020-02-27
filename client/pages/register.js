@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { API } from '../config';
 import Layout from '../components/Layout';
 import SuccessMessage from '../components/SuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
@@ -39,10 +40,7 @@ const Register = () => {
       password: user.password
     };
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/register',
-        payload
-      );
+      const response = await axios.post(`${API}/register`, payload);
       setSuccess(response.data.message);
       setUser('');
     } catch (error) {

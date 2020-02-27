@@ -1,6 +1,6 @@
 # Multi Users App / Hackr.io clone
 
-Tech stack: Next.js, Node.js, Express, AWS S3, AWS SES, AWS EC2, AWS Route 53, AWS IAM, MongoDB
+Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Route 53, AWS IAM
 
 ## App Features
 
@@ -10,7 +10,7 @@ Tech stack: Next.js, Node.js, Express, AWS S3, AWS SES, AWS EC2, AWS Route 53, A
 
 - <del>Register</del>
 - <del>Account Activation</del>
-- Login
+- <del>Login</del>
 - Forgot/Reset Password
 - Submit/Update/Delete Links
 - Update Profile

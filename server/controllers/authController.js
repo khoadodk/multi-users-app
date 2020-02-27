@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const shortId = require('shortid');
 const AWS = require('aws-sdk');
 
 const { registerEmailParams } = require('../helpers/email');
@@ -49,4 +48,66 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {};
+exports.registerActivate = async (req, res) => {
+  const { token } = req.body;
+  try {
+    const verified = await jwt.verify(
+      token,
+      process.env.JWT_ACCOUNT_ACTIVATION
+    );
+    if (!verified)
+      res.status(422).json({
+        message: `We could not verify your account. Please try again!`
+      });
+
+    const { name, email, password } = jwt.decode(token);
+    const user = await User.findOne({ email });
+    if (user)
+      return res.status(401).json({
+        error: 'Email already exists'
+      });
+    const newUser = new User({ username: name, name, email, password });
+
+    newUser.save();
+    res.status(200).json({
+      message: 'Registration success! Please log in.'
+    });
+  } catch (error) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: 'Server error! Please sign up again later.' });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        error: 'User with that email does not exist. Please register!'
+      });
+    } else {
+      if (!user.authenticate(password)) {
+        return res.status(400).json({
+          error: 'Email and password do not match'
+        });
+      }
+      // generate token and send to client
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '7d'
+      });
+      const { _id, name, email, role } = user;
+
+      return res.status(200).json({
+        token,
+        user: { _id, name, email, role }
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const expressJWT = require('express-jwt');
 const AWS = require('aws-sdk');
 
 const { registerEmailParams } = require('../helpers/email');
@@ -12,6 +12,48 @@ AWS.config.update({
 });
 
 const ses = new AWS.SES({ apiVersion: '2010-12-01' });
+
+//By default, the decoded token is attached to req.user
+exports.requireSignin = expressJWT({ secret: process.env.JWT_SECRET });
+
+exports.userMiddleware = async (req, res, next) => {
+  try {
+    const _id = req.user._id;
+    const user = await User.findOne({ _id });
+    if (!user)
+      res.status(422).json({
+        message: 'User is not found!'
+      });
+    //  pass user's info to profile
+    req.profile = user;
+    next();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Access Denied!' });
+  }
+};
+
+exports.adminMiddleware = async (req, res, next) => {
+  try {
+    const _id = req.user._id;
+    const user = await User.findOne({ _id });
+    if (!user) {
+      res.status(422).json({
+        message: 'User is not found!'
+      });
+    } else if (user.role !== 'admin' && user.role !== 'root') {
+      res.status(422).json({
+        message: 'Admin resource! Access Denied'
+      });
+    } else {
+      req.profile = user;
+      next();
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Access Denied!' });
+  }
+};
 
 exports.register = async (req, res) => {
   try {
@@ -86,12 +128,12 @@ exports.login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({
+      return res.status(422).json({
         error: 'User with that email does not exist. Please register!'
       });
     } else {
       if (!user.authenticate(password)) {
-        return res.status(400).json({
+        return res.status(404).json({
           error: 'Email and password do not match'
         });
       }

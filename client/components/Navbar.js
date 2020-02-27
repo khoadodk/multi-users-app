@@ -33,7 +33,11 @@ const Navbar = () => {
           <li className="nav-item ml-auto">
             <Link href="/admin">
               <a className="nav-link text-light">
-                <p className={router.pathname === '/' ? 'link active' : 'link'}>
+                <p
+                  className={
+                    router.pathname === '/admin' ? 'link active' : 'link'
+                  }
+                >
                   {isAuth().name}
                 </p>
               </a>

@@ -17,9 +17,8 @@ const ActivateAccount = ({ router }) => {
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
-  const token = router.query._id;
-
   useEffect(() => {
+    const token = router.query._id;
     if (token) {
       const { name } = jwt.decode(token);
       setUser({ name, token });
@@ -42,7 +41,9 @@ const ActivateAccount = ({ router }) => {
         {success && <SuccessMessage success={success} />}
         {error && <ErrorMessage error={error} />}
 
-        <p>Hi {user.name}! Ready to activate your account?</p>
+        <p>
+          Hi <strong>{user.name}</strong>! Ready to activate your account?
+        </p>
         <button className="btn btn-outline-primary" onClick={handleSubmit}>
           Activate
         </button>

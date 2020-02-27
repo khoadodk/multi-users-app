@@ -31,6 +31,6 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 
 2. Controllers
 
-- Users: login, <del>register</del>, <del>email confirmation</del>, forgotPassword, resetPassword
+- Users: <del>login</del>, <del>register</del>, <del>email confirmation</del>, forgot password, reset password
 - Categories: all categories, single categories, CRUD categories, image upload to AWS S3
 - Links: all links, single link, CRUD links

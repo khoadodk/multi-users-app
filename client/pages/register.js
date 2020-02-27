@@ -42,7 +42,7 @@ const Register = () => {
     try {
       const response = await axios.post(`${API}/register`, payload);
       setSuccess(response.data.message);
-      setUser('');
+      setUser(INITAL_USER);
     } catch (error) {
       setError(error.response.data.error);
     }

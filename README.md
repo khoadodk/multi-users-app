@@ -11,26 +11,25 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 - <del>Register</del>
 - <del>Account Activation</del>
 - <del>Login</del>
-- Forgot/Reset Password
+- <del>Forgot/Reset Password</del>
 - Submit/Update/Delete Links
 - Update Profile
 
 2. Admin
 
-- Create/Update/Delete Categories
+- <del>Create/Update/Delete Categories</del>
 - Submit/Update/Delete Links
-- Update Profile
 
 ### Node/Express - Back End
 
 1. Models
 
 - <del>User</del>
-- Categories
+- <del>Categories</del>
 - Links
 
 2. Controllers
 
-- Users: <del>login</del>, <del>register</del>, <del>email confirmation</del>, forgot password, reset password
-- Categories: all categories, single categories, CRUD categories, image upload to AWS S3
+- Users: <del>login</del>, <del>register</del>, <del>email confirmation</del>, <del>forgot password</del>, <del>reset password</del>
+- Categories: <del>all categories, single categories, CRUD categories, image upload to AWS S3</del>
 - Links: all links, single link, CRUD links

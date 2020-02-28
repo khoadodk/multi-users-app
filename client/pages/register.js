@@ -16,8 +16,8 @@ const Register = () => {
   };
   const [user, setUser] = useState(INITAL_USER);
   const [disabled, setDisabled] = useState(true);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const isUser = Object.values(user).every(element => Boolean(element));

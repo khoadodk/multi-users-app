@@ -36,10 +36,6 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: 'user',
       enum: ['admin', 'user', 'root']
-    },
-    resetPasswordLink: {
-      data: String,
-      default: ''
     }
   },
   { timestamps: true }

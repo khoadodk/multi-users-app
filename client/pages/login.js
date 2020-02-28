@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
+import Link from 'next/link';
 
 import { API } from '../config';
 import Layout from '../components/Layout';
@@ -39,7 +40,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <div className="col-md-8 offset-2">
+      <div className="container">
         <h1 className="title">Log In</h1>
 
         {error && <ErrorMessage error={error} />}
@@ -73,6 +74,18 @@ const Login = () => {
             Log In
           </button>
         </form>
+        <p>
+          Forget your password?{' '}
+          <Link href="/auth/password/forgot">
+            <a>Reset</a>
+          </Link>
+        </p>
+        <p>
+          Don't have an account?{' '}
+          <Link href="/register">
+            <a>Register</a>
+          </Link>
+        </p>
       </div>
     </Layout>
   );

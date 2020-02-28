@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 import { API } from '../config';
 import Layout from '../components/Layout';
@@ -50,7 +51,7 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="col-md-8 offset-2">
+      <div className="container">
         <h1 className="title">Register</h1>
         {success && <SuccessMessage success={success} />}
         {error && <ErrorMessage error={error} />}
@@ -107,6 +108,12 @@ const Register = () => {
             Submit
           </button>
         </form>
+        <p>
+          Already have an account?{' '}
+          <Link href="/login">
+            <a>Login Here</a>
+          </Link>
+        </p>
       </div>
     </Layout>
   );

@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar bg-dark ">
-      <a className="navbar-brand text-light">App</a>
+      <a className="navbar-brand text-light"></a>
 
       <ul className="nav">
         <li className="nav-item">
@@ -24,6 +24,21 @@ const Navbar = () => {
             <a className="nav-link text-light">
               <p className={router.pathname === '/' ? 'link active' : 'link'}>
                 Home
+              </p>
+            </a>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/user/link/create">
+            <a className="nav-link text-light">
+              <p
+                className={
+                  router.pathname === '/user/link/create'
+                    ? 'link active'
+                    : 'link'
+                }
+              >
+                Create Links
               </p>
             </a>
           </Link>
@@ -93,11 +108,13 @@ const Navbar = () => {
         )}
 
         {isAuth() && (
-          <li className="nav-item">
-            <a onClick={logout} className="nav-link text-light">
-              Log Out
-            </a>
-          </li>
+          <>
+            <li className="nav-item">
+              <a onClick={logout} className="nav-link text-light">
+                Log Out
+              </a>
+            </li>
+          </>
         )}
       </ul>
     </nav>

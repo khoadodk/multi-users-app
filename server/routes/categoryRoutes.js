@@ -23,7 +23,7 @@ const {
 } = require('../controllers/categoryController');
 
 router.post(
-  '/category/create',
+  '/category',
   categoryCreateValidator,
   runValidation,
   requireSignin,

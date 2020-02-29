@@ -8,7 +8,7 @@ import withAdmin from '../../withAdmin';
 import ErrorMessage from '../../../components/ErrorMessage';
 import SuccessMessage from '../../../components/SuccessMessage';
 
-const Create = ({ token }) => {
+const CreateCategory = ({ token }) => {
   const INITIAL_STATE = { name: '', content: '', image: '' };
   const [state, setState] = useState(INITIAL_STATE);
   const [imageUploadButtonName, setImageUploadButtonName] = useState(
@@ -58,7 +58,7 @@ const Create = ({ token }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${API}/category/create`,
+        `${API}/category`,
         { name, content, image },
         {
           headers: {
@@ -126,4 +126,4 @@ const Create = ({ token }) => {
   );
 };
 
-export default withAdmin(Create);
+export default withAdmin(CreateCategory);

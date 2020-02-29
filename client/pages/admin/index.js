@@ -12,7 +12,7 @@ const Admin = ({ user }) => {
       <h1 className="title">Admin Dashboard</h1>
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 mb-3">
             <ul className="list-group">
               <li className="list-group-item">
                 <Link href="/user/update">

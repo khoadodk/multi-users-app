@@ -28,21 +28,6 @@ const Navbar = () => {
             </a>
           </Link>
         </li>
-        <li className="nav-item">
-          <Link href="/user/link/create">
-            <a className="nav-link text-light">
-              <p
-                className={
-                  router.pathname === '/user/link/create'
-                    ? 'link active'
-                    : 'link'
-                }
-              >
-                Create Links
-              </p>
-            </a>
-          </Link>
-        </li>
 
         {isAuth() && isAdminOrRoot && (
           <li className="nav-item ml-auto">
@@ -111,11 +96,15 @@ const Navbar = () => {
           <>
             <li className="nav-item">
               <a onClick={logout} className="nav-link text-light">
-                Log Out
+                <p className="link">Log Out</p>
               </a>
             </li>
           </>
         )}
+
+        <Link href="/user/link/create">
+          <a className="btn btn-outline-info ml-3">Post Links</a>
+        </Link>
       </ul>
     </nav>
   );

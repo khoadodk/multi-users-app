@@ -77,7 +77,7 @@ const CreateLink = ({ token }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess(response.data.message);
-      setLink(INITIAL_LINK);
+      setTimeout(() => window.location.reload(true), 3000);
     } catch (error) {
       setError(error.response.data.error);
     }

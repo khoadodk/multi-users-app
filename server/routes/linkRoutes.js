@@ -19,7 +19,9 @@ const {
   listAll,
   read,
   update,
-  remove
+  remove,
+  clickCount,
+  popularInACategory
 } = require('../controllers/linkController');
 
 router.post(
@@ -41,5 +43,10 @@ router.put(
   update
 );
 router.delete('/link/:slug', requireSignin, userMiddleware, remove);
+// Click Count
+router.put('/click-count', clickCount);
+
+//Get all links in a category
+router.get('/category/:slug', popularInACategory);
 
 module.exports = router;

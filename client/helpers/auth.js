@@ -85,7 +85,7 @@ export const isAuth = () => {
 export const logout = () => {
   removeCookie('token');
   removeLocalStorage('user');
-  Router.push('/login');
+  Router.push('/');
 };
 
 export const updateUser = (user, next) => {

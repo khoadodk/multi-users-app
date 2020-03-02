@@ -24,8 +24,8 @@ const PopularLinks = ({ link }) => {
       </div>
 
       <div>
-        {categories.map(c => (
-          <span key={c._id} className="badge text-success">
+        {categories.map((c, i) => (
+          <span key={i} className="badge text-success">
             {c.name}
           </span>
         ))}

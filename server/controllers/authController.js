@@ -58,7 +58,7 @@ exports.adminMiddleware = async (req, res, next) => {
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, categories } = req.body;
     const user = await User.findOne({ email });
     if (user) {
       return res
@@ -66,7 +66,7 @@ exports.register = async (req, res) => {
         .json({ error: `User with ${email} already exists` });
     } else {
       const token = jwt.sign(
-        { name, email, password },
+        { name, email, password, categories },
         process.env.JWT_ACCOUNT_ACTIVATION,
         {
           expiresIn: '45m'
@@ -100,13 +100,19 @@ exports.registerActivate = async (req, res) => {
         error: `We could not verify your account. Please try again!`
       });
 
-    const { name, email, password } = jwt.decode(token);
+    const { name, email, password, categories } = jwt.decode(token);
     const user = await User.findOne({ email });
     if (user)
       return res.status(401).json({
         error: 'Email already exists'
       });
-    const newUser = new User({ username: name, name, email, password });
+    const newUser = new User({
+      username: name,
+      name,
+      email,
+      password,
+      categories
+    });
 
     newUser.save();
     res.status(200).json({

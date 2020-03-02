@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 const saltRounds = 10;
 
+const { ObjectId } = mongoose.Schema;
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -36,7 +38,14 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: 'user',
       enum: ['admin', 'user', 'root']
-    }
+    },
+    categories: [
+      {
+        type: ObjectId,
+        ref: 'Category',
+        required: true
+      }
+    ]
   },
   { timestamps: true }
 );

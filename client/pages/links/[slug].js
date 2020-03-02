@@ -106,7 +106,7 @@ const Links = ({ links, category, linksLimit }) => {
               {popular &&
                 popular.map(link => (
                   <div className="row alert alert-light p-2" key={link._id}>
-                    <PopularLinks link={link} category={category} />
+                    <PopularLinks link={link} />
                   </div>
                 ))}
             </div>

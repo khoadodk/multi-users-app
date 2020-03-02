@@ -23,7 +23,9 @@ const ActivateAccount = ({ router }) => {
       const { name } = jwt.decode(token);
       setUser({ name, token });
     }
-  }, []);
+  }, [router]);
+
+  const { token } = user;
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -31,7 +33,8 @@ const ActivateAccount = ({ router }) => {
       const response = await axios.post(`${API}/register/activate`, { token });
       setSuccess(response.data.message);
     } catch (error) {
-      setError(error.response.data.error);
+      console.log(error);
+      // setError(error.response.data.error);
     }
   };
   return (

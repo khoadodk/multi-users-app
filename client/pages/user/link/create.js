@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Router from 'next/router';
-import Link from 'next/link';
 
 import { API } from '../../../config';
 import { isAuth, getCookie } from '../../../helpers/auth';
@@ -77,7 +75,7 @@ const CreateLink = ({ token }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess(response.data.message);
-      setTimeout(() => window.location.reload(true), 3000);
+      setLink(INITIAL_LINK);
     } catch (error) {
       setError(error.response.data.error);
     }
@@ -99,6 +97,7 @@ const CreateLink = ({ token }) => {
                       type="checkbox"
                       onChange={handleToggle(c._id)}
                       className="mr-2"
+                      checked={categories.includes(c._id)}
                     />
                     <label className="form-check-label">{c.name}</label>
                   </li>

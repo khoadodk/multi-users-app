@@ -16,19 +16,16 @@ const PopularLinks = ({ link }) => {
   console.log(link);
   return (
     <>
-      <div className="col-md-8" onClick={() => handleClick(_id)}>
+      <div onClick={() => handleClick(_id)}>
         <a href={url} target="_blank">
           <p className="pt-2">{title}</p>
         </a>
+        <span className="badge text-dark pull-right">{clicks} clicks</span>
       </div>
 
-      <div className="col-md-4 pt-2">
-        <span className="badge text-danger pull-right">{clicks} clicks</span>
-      </div>
-
-      <div className="col-md-12">
-        {categories.map((c, i) => (
-          <span key={i} className="badge text-success">
+      <div>
+        {categories.map(c => (
+          <span key={c._id} className="badge text-success">
             {c.name}
           </span>
         ))}

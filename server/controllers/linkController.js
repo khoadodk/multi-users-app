@@ -74,6 +74,42 @@ exports.listAll = async (req, res) => {
     res.status(500).json({ error: 'Server error! Please try again later.' });
   }
 };
-exports.read = async (req, res) => {};
-exports.update = async (req, res) => {};
-exports.remove = async (req, res) => {};
+
+exports.read = async (req, res) => {
+  try {
+    const link = await Link.findOne({ _id: req.params.id });
+    res.status(200).json(link);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const { title, url, categories, type, medium } = req.body;
+    const updatedLink = await Link.findOneAndUpdate(
+      { _id: req.params.id },
+      { title, url, categories, type, medium },
+      { new: true }
+    );
+    if (!updatedLink) {
+      res.status(422).json({ error: 'Failed to update the link' });
+    }
+    updatedLink.save();
+    res.status(200).json({ message: 'Link is updated successfully!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};
+
+exports.remove = async (req, res) => {
+  try {
+    await Link.findOneAndRemove({ _id: req.params.id });
+    res.status(200).json({ message: 'Link is deleted successfully!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};

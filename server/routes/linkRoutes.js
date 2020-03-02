@@ -33,16 +33,16 @@ router.post(
   create
 );
 router.get('/links', listAll);
-router.get('/link/:slug', read);
+router.get('/link/:id', read);
 router.put(
-  '/link/:slug',
+  '/link/:id',
   linkUpdateValidator,
   runValidation,
   requireSignin,
   userMiddleware,
   update
 );
-router.delete('/link/:slug', requireSignin, userMiddleware, remove);
+router.delete('/link/:id', requireSignin, userMiddleware, remove);
 // Click Count
 router.put('/click-count', clickCount);
 

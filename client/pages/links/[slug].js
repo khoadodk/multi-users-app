@@ -33,8 +33,8 @@ const Links = ({ links, category, linksLimit }) => {
       limit
     });
     setAllLinks([...allLinks, ...response.data.links]);
-    console.log('allLinks', allLinks);
-    console.log('response.data.links.length', response.data.links.length);
+    // console.log('allLinks', allLinks);
+    // console.log('response.data.links.length', response.data.links.length);
     setSize(response.data.links.length);
     setSkip(toSkip);
   };
@@ -89,7 +89,6 @@ const Links = ({ links, category, linksLimit }) => {
                 <div className="row alert alert-info p-2" key={link._id}>
                   <LinkComponent
                     link={link}
-                    category={category}
                     handleClickCount={handleClickCount}
                   />
                 </div>
@@ -106,7 +105,7 @@ const Links = ({ links, category, linksLimit }) => {
             <div className="p-3">
               {popular &&
                 popular.map(link => (
-                  <div className="row alert alert-primary p-2" key={link._id}>
+                  <div className="row alert alert-light p-2" key={link._id}>
                     <PopularLinks link={link} category={category} />
                   </div>
                 ))}

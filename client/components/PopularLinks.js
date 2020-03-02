@@ -13,7 +13,7 @@ const PopularLinks = ({ link }) => {
     categories,
     clicks
   } = link;
-  console.log(link);
+
   return (
     <>
       <div onClick={() => handleClick(_id)}>

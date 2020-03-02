@@ -83,20 +83,22 @@ const UpdateLink = ({ oldLink, token }) => {
         <div className="row">
           <div className="col-md-4">
             {/* Categories */}
-            <div className="text-center">
+            <div>
               <h5>Categories</h5>
-              {loadedCategories &&
-                loadedCategories.map(c => (
-                  <li className="list-unstyled " key={c._id}>
-                    <input
-                      type="checkbox"
-                      onChange={handleToggle(c._id)}
-                      className="mr-2"
-                      checked={categories.includes(c._id)}
-                    />
-                    <label className="form-check-label">{c.name}</label>
-                  </li>
-                ))}
+              <ul style={{ maxHeight: '150px', overflowY: 'scroll' }}>
+                {loadedCategories &&
+                  loadedCategories.map(c => (
+                    <li className="list-unstyled " key={c._id}>
+                      <input
+                        type="checkbox"
+                        onChange={handleToggle(c._id)}
+                        className="mr-2"
+                        checked={categories.includes(c._id)}
+                      />
+                      <label className="form-check-label">{c.name}</label>
+                    </li>
+                  ))}
+              </ul>
             </div>
             {/* Type */}
             <div className="row pt-3 d-flex justify-content-center">

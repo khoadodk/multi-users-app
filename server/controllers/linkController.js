@@ -3,6 +3,15 @@ const AWS = require('aws-sdk');
 const Link = require('../models/Link');
 const User = require('../models/User');
 const Category = require('../models/Category');
+const { linkPublishedParams } = require('../helpers/email');
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
+
+const ses = new AWS.SES({ apiVersion: '2010-12-01' });
 
 exports.popularInACategory = async (req, res) => {
   try {
@@ -58,6 +67,19 @@ exports.create = async (req, res) => {
       slug,
       postedBy: req.user._id
     }).save();
+
+    // Find user to send email when a new link gets posted
+    //1. Find the user with subscribed category
+    const users = await User.find({ categories: { $in: categories } });
+    //2. Find data of the link's category
+    const categoriesData = await Category.find({ _id: { $in: categories } });
+    //3. Set the categories's data to the link
+    newLink.categories = categoriesData;
+    //4. Loop over the subscriber and send the email with the params
+    for (let i = 0; i < users.length; i++) {
+      const params = linkPublishedParams(users[i].email, newLink);
+      await ses.sendEmail(params).promise();
+    }
 
     res.status(200).json({ message: `${title} is created` });
   } catch (err) {

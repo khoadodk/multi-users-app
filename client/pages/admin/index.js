@@ -21,7 +21,12 @@ const Admin = ({ user }) => {
               </li>
               <li className="list-group-item">
                 <Link href="/admin/category/create">
-                  <a>Category</a>
+                  <a>Create Categories</a>
+                </Link>
+              </li>
+              <li className="list-group-item">
+                <Link href="/admin/category/read">
+                  <a>Update/Delete Categories</a>
                 </Link>
               </li>
             </ul>

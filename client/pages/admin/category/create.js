@@ -78,7 +78,7 @@ const CreateCategory = ({ token }) => {
   return (
     <Layout>
       <div className="container">
-        <h1 className="title">Register</h1>
+        <h1 className="title">Create Category</h1>
         {success && <SuccessMessage success={success} />}
         {error && <ErrorMessage error={error} />}
         <form onSubmit={handleSubmit}>

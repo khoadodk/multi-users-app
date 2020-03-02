@@ -88,11 +88,11 @@ const CreateLink = ({ token }) => {
         <div className="row">
           <div className="col-md-4">
             {/* Categories */}
-            <div>
+            <div className="text-center">
               <h5>Categories</h5>
               {loadedCategories &&
                 loadedCategories.map((c, i) => (
-                  <li className="list-unstyled" key={c._id}>
+                  <li className="list-unstyled " key={c._id}>
                     <input
                       type="checkbox"
                       onChange={handleToggle(c._id)}
@@ -104,7 +104,7 @@ const CreateLink = ({ token }) => {
                 ))}
             </div>
             {/* Type */}
-            <div className="row pt-3">
+            <div className="row pt-3 d-flex justify-content-center">
               <h5>Type: &nbsp;</h5>
               <label className="form-check-label mr-2">
                 <input
@@ -134,7 +134,7 @@ const CreateLink = ({ token }) => {
             </div>
 
             {/* Medium */}
-            <div className="row">
+            <div className="row d-flex justify-content-center">
               <h5>Format: &nbsp;</h5>
               <label className="form-check-label mr-2">
                 <input

@@ -10,7 +10,8 @@ const {
 
 const {
   requireSignin,
-  userMiddleware
+  userMiddleware,
+  adminMiddleware
 } = require('../controllers/authController');
 
 //Controller
@@ -21,7 +22,8 @@ const {
   update,
   remove,
   clickCount,
-  popularInACategory
+  popularInACategory,
+  list
 } = require('../controllers/linkController');
 
 router.post(
@@ -43,10 +45,11 @@ router.put(
   update
 );
 router.delete('/link/:id', requireSignin, userMiddleware, remove);
-// Click Count
 router.put('/click-count', clickCount);
-
 //Get all links in a category
 router.get('/category/:slug', popularInACategory);
+
+// admin link
+router.post('/links', requireSignin, adminMiddleware, list);
 
 module.exports = router;

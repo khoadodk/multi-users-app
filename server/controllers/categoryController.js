@@ -85,7 +85,7 @@ exports.read = async (req, res) => {
       res.status(422).json({ error: 'The category does not exist' });
     }
     const links = await Link.find({ categories: category })
-      .populate('postedBy', '_id name usename')
+      .populate('postedBy', '_id name username')
       .populate('categories', 'name')
       .sort({ createdAt: -1 })
       .limit(limit)

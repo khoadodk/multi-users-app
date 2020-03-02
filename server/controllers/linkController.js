@@ -113,3 +113,25 @@ exports.remove = async (req, res) => {
     res.status(500).json({ error: 'Server error! Please try again later.' });
   }
 };
+
+exports.list = async (req, res) => {
+  try {
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+    const links = await Link.find()
+      .populate('postedBy', '_id name username')
+      .populate('categories', 'name')
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
+    if (!links) {
+      res
+        .status(422)
+        .json({ error: 'Can not load your request! Please try again later' });
+    }
+    res.status(200).json({ links });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};

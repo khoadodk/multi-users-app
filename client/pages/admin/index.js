@@ -29,6 +29,11 @@ const Admin = ({ user }) => {
                   <a>Update/Delete Categories</a>
                 </Link>
               </li>
+              <li className="list-group-item">
+                <Link href="/admin/link/read">
+                  <a>Update/Delete Links</a>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="col-md-8">

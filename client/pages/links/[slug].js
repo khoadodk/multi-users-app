@@ -79,7 +79,12 @@ const Links = ({ links, category, linksLimit }) => {
 
         <div className="row pt-3">
           <div className="col-md-8">
-            {allLinks &&
+            {allLinks.length === 0 ? (
+              <div className="text-center">
+                <h4 className="text-danger">No posted links yet! :(</h4>
+                Create one <a href="/user/link/create">here</a>
+              </div>
+            ) : (
               allLinks.map(link => (
                 <div className="row alert alert-info p-2" key={link._id}>
                   <LinkComponent
@@ -88,7 +93,9 @@ const Links = ({ links, category, linksLimit }) => {
                     handleClickCount={handleClickCount}
                   />
                 </div>
-              ))}
+              ))
+            )}
+
             <div className="d-flex justify-content-center">
               {loadMoreButton()}
             </div>

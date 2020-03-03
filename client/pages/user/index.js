@@ -26,7 +26,7 @@ const User = ({ user, userLinks, token }) => {
           <div className="col-md-4 mb-3">
             <ul className="list-group">
               <li className="list-group-item">
-                <Link href="/user/update">
+                <Link href="/user/profile/update">
                   <a>Update Profile</a>
                 </Link>
               </li>

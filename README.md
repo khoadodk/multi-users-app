@@ -13,7 +13,7 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 - <del>Login</del>
 - <del>Forgot/Reset Password</del>
 - <del>Submit/Update/Delete Links</del>
-- Update Profile
+- <del>Update Profile</del>
 
 2. Admin
 

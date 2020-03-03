@@ -18,6 +18,17 @@ exports.userRegisterValidator = [
     .withMessage('Please select at least one category')
 ];
 
+exports.userUpdateValidator = [
+  check('username')
+    .not()
+    .isEmpty()
+    .withMessage('Username is required'),
+  check('name')
+    .not()
+    .isEmpty()
+    .withMessage('Name is required')
+];
+
 exports.userLoginValidator = [
   check('email')
     .isEmail()

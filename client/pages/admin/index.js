@@ -15,11 +15,6 @@ const Admin = ({ user }) => {
           <div className="col-md-4 mb-3">
             <ul className="list-group">
               <li className="list-group-item">
-                <Link href="/user/update">
-                  <a>Update Profile</a>
-                </Link>
-              </li>
-              <li className="list-group-item">
                 <Link href="/admin/category/create">
                   <a>Create Categories</a>
                 </Link>

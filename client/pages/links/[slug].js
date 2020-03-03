@@ -18,7 +18,7 @@ const Links = ({ links, category, linksLimit }) => {
   }, []);
 
   const loadPopular = async () => {
-    const response = await axios.get(`${API}/category/${category.slug}`);
+    const response = await axios.get(`${API}/links/popular/${category.slug}`);
     setPopular(response.data);
   };
 
@@ -100,13 +100,15 @@ const Links = ({ links, category, linksLimit }) => {
             </div>
           </div>
 
-          <div className="col-md-4 text-center pt-3">
-            <h3 className="font-weight-bold">Most popular</h3>
+          <div className="col-md-4  pt-3">
+            <h4 className="font-weight-bold text-center">
+              Most popular in {category.name}
+            </h4>
             <div className="p-3">
               {popular &&
                 popular.map(link => (
-                  <div className="row alert alert-light p-2" key={link._id}>
-                    <PopularLinks link={link} />
+                  <div className="row alert alert-warning r" key={link._id}>
+                    <PopularLinks link={link} handleClick={handleClickCount} />
                   </div>
                 ))}
             </div>

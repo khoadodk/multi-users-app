@@ -13,6 +13,20 @@ AWS.config.update({
 
 const ses = new AWS.SES({ apiVersion: '2010-12-01' });
 
+exports.popular = async (req, res) => {
+  try {
+    const links = await Link.find()
+      .populate('postedBy', 'username name')
+      .populate('categories', 'name')
+      .sort({ clicks: -1 })
+      .limit(3);
+    res.status(200).json(links);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error! Please try again later.' });
+  }
+};
+
 exports.popularInACategory = async (req, res) => {
   try {
     const { slug } = req.params;

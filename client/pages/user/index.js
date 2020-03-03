@@ -51,6 +51,9 @@ const User = ({ user, userLinks, token }) => {
                   <a href={link.url} target="_blank">
                     <h6 className="pt-2">{link.title}</h6>
                   </a>
+                  <a href={link.url} target="_blank">
+                    <p className="pt-2">{link.url}</p>
+                  </a>
                 </div>
                 <div className="col-md-4 pt-2 text-center">
                   <h5 className="text-danger">{link.clicks} Clicks</h5>

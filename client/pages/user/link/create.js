@@ -84,7 +84,7 @@ const CreateLink = ({ token }) => {
   return (
     <Layout>
       <div className="container">
-        <h1 className="title">Create Links</h1>
+        <h1 className="title">Post Links</h1>
         <div className="row">
           <div className="col-md-4">
             {/* Categories */}

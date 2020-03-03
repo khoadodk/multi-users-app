@@ -38,7 +38,7 @@ const Navbar = () => {
                     router.pathname === '/admin' ? 'link active' : 'link'
                   }
                 >
-                  {isAuth().name}
+                  {isAuth().username}
                 </p>
               </a>
             </Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
                     router.pathname === '/user' ? 'link active' : 'link'
                   }
                 >
-                  {isAuth().name}
+                  {isAuth().username}
                 </p>
               </a>
             </Link>

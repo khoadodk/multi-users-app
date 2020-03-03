@@ -4,6 +4,12 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 
 ## App Features
 
+Todos:
+
+- Like
+- User's public profile
+- Google Login
+
 ### React - Front End
 
 1. User

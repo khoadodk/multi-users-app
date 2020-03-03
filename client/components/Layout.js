@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
 import NavBar from './Navbar';
-import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (
@@ -50,8 +49,6 @@ const Layout = ({ children }) => {
 
       <NavBar />
       {children}
-
-      <Footer />
     </>
   );
 };

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { API } from '../config';
 import Layout from '../components/Layout';
 import LinkComponent from '../components/LinkComponent';
+import Footer from '../components/Footer';
 
 const Home = ({ categories, popular }) => {
   const handleClickCount = async _id => {
@@ -57,6 +58,7 @@ const Home = ({ categories, popular }) => {
             </div>
           ))}
       </div>
+      <Footer />
     </Layout>
   );
 };

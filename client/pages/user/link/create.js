@@ -83,7 +83,7 @@ const CreateLink = ({ token }) => {
 
   return (
     <Layout>
-      <div className="container">
+      <div className="container main">
         <h1 className="title">Post Links</h1>
         <div className="row">
           <div className="col-md-4">

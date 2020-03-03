@@ -24,8 +24,11 @@ const Layout = ({ children }) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
         />
+        <link
+          href="https://fonts.googleapis.com/css?family=Baloo+Paaji&display=swap"
+          rel="stylesheet"
+        />
         <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
-        <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css" />
       </Head>
       <NavBar />
       {children}

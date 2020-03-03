@@ -16,7 +16,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar bg-dark ">
-      <a className="navbar-brand text-light"></a>
+      <a className="navbar-brand text-light" href="/">
+        eLearn
+      </a>
 
       <ul className="nav">
         <li className="nav-item">

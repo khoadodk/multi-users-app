@@ -1,6 +1,7 @@
 # Multi Users App / Hackr.io clone
 
 Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Route 53, AWS IAM
+![Image description](https://github.com/khoadodk/multi-users-app/blob/master/homepage.PNG)
 
 ## App Features
 

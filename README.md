@@ -5,9 +5,15 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 
 ## App Features
 
+1. Register, Login
+2. Forgot, Reset password with AWS SES
+3. Admin dashboard: CRUD categories, CRUD links
+4. User dashboard: CRUD links
+5. Email notification to categories subscribers when a new link posted
+
 Todos:
 
-- Like
+- Like feature to the links
 - User's public profile
 - Google Login
 
@@ -38,5 +44,5 @@ Todos:
 2. Controllers
 
 - Users: <del>login</del>, <del>register</del>, <del>email confirmation</del>, <del>forgot password</del>, <del>reset password</del>
-- Categories: <del>all categories</del>, <del>single categories</del>, <del>CRUD categories</del>, <del>allimage upload to AWS S3</del>
+- Categories: <del>all categories</del>, <del>single categories</del>, <del>CRUD categories</del>, <del>image upload to AWS S3</del>
 - Links: <del>all links</del>, <del>single link</del>, <del>CRUD links</del>

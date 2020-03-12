@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import axios from 'axios';
+import Link from "next/link";
+import axios from "axios";
 
-import withUser from '../withUser';
-import Layout from '../../components/Layout';
-import Profile from '../../components/Profile';
-import date from '../../utils/formatDate';
-import { API } from '../../config';
+import withUser from "../withUser";
+import Layout from "../../components/Layout";
+import Profile from "../../components/Profile";
+import date from "../../utils/formatDate";
+import { API } from "../../config";
 
 const User = ({ user, userLinks, token }) => {
   const confirmDelete = async _id => {
@@ -76,7 +76,7 @@ const User = ({ user, userLinks, token }) => {
                   <button
                     onClick={() =>
                       window.confirm(
-                        'Are you sure you wish to delete this item?'
+                        "Are you sure you wish to delete this item?"
                       ) && confirmDelete(link._id)
                     }
                     className="btn btn-sm btn-outline-danger btn-block"

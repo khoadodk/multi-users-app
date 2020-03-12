@@ -1,4 +1,4 @@
-import date from '../utils/formatDate';
+import date from "../utils/formatDate";
 
 const LinkComponent = ({ link, handleClickCount }) => {
   const {
@@ -25,7 +25,9 @@ const LinkComponent = ({ link, handleClickCount }) => {
         <span className="pull-right">
           <span>
             {date(createdAt)} By
-            <strong> {postedBy.name}</strong>
+            <a href={"/profile/" + postedBy._id}>
+              <strong> {postedBy.username}</strong>
+            </a>
           </span>
         </span>
       </div>

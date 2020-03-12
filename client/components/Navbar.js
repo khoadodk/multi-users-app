@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
-import NProgess from 'nprogress';
+import Link from "next/link";
+import Router, { useRouter } from "next/router";
+import NProgess from "nprogress";
 
-import { isAuth, logout } from '../helpers/auth';
+import { isAuth, logout } from "../helpers/auth";
 
 Router.onRouteChangeStart = () => NProgess.start();
 Router.onRouteChangeComplete = () => NProgess.done();
@@ -11,8 +11,8 @@ const Navbar = () => {
   const router = useRouter();
 
   const isAdminOrRoot =
-    (isAuth() && isAuth().role === 'root') ||
-    (isAuth() && isAuth().role === 'admin');
+    (isAuth() && isAuth().role === "root") ||
+    (isAuth() && isAuth().role === "admin");
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark ">
@@ -32,7 +32,7 @@ const Navbar = () => {
           <li className="nav-item">
             <Link href="/">
               <a className="nav-link text-light">
-                <p className={router.pathname === '/' ? 'link active' : 'link'}>
+                <p className={router.pathname === "/" ? "link active" : "link"}>
                   Home
                 </p>
               </a>
@@ -40,12 +40,12 @@ const Navbar = () => {
           </li>
 
           {isAuth() && isAdminOrRoot && (
-            <li className="nav-item ml-auto">
+            <li className="nav-item">
               <Link href="/admin">
                 <a className="nav-link text-light">
                   <p
                     className={
-                      router.pathname === '/admin' ? 'link active' : 'link'
+                      router.pathname === "/admin" ? "link active" : "link"
                     }
                   >
                     {isAuth().username}
@@ -55,13 +55,13 @@ const Navbar = () => {
             </li>
           )}
 
-          {isAuth() && isAuth().role === 'user' && (
-            <li className="nav-item ml-auto">
+          {isAuth() && isAuth().role === "user" && (
+            <li className="nav-item ">
               <Link href="/user">
                 <a className="nav-link text-light">
                   <p
                     className={
-                      router.pathname === '/user' ? 'link active' : 'link'
+                      router.pathname === "/user" ? "link active" : "link"
                     }
                   >
                     {isAuth().username}
@@ -78,7 +78,7 @@ const Navbar = () => {
                   <a className="nav-link text-light">
                     <p
                       className={
-                        router.pathname === '/login' ? 'link active' : 'link'
+                        router.pathname === "/login" ? "link active" : "link"
                       }
                     >
                       Login
@@ -91,7 +91,7 @@ const Navbar = () => {
                   <a className="nav-link text-light">
                     <p
                       className={
-                        router.pathname === '/register' ? 'link active' : 'link'
+                        router.pathname === "/register" ? "link active" : "link"
                       }
                     >
                       Register

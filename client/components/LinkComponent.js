@@ -1,6 +1,10 @@
+import { useState } from "react";
+import axios from "axios";
+
+import { API } from "../config";
 import date from "../utils/formatDate";
 
-const LinkComponent = ({ link, handleClickCount }) => {
+const LinkComponent = ({ link }) => {
   const {
     title,
     _id,
@@ -10,8 +14,23 @@ const LinkComponent = ({ link, handleClickCount }) => {
     type,
     medium,
     postedBy,
-    categories
+    categories,
+    likes
   } = link;
+
+  const [clickCount, setClickCount] = useState(clicks);
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const handleClickCount = async _id => {
+    const response = await axios.put(`${API}/click-count`, { _id });
+    setClickCount(response.data.clicks);
+  };
+
+  const handleLikeCount = async _id => {
+    const response = await axios.put(`${API}/like-count`, { _id });
+    setLikeCount(response.data.likes);
+  };
+
   return (
     <>
       <div className="col-md-8">
@@ -21,15 +40,21 @@ const LinkComponent = ({ link, handleClickCount }) => {
         </a>
       </div>
       <div className="col-md-4 pt-2">
-        <h5 className="text-danger">{clicks} Clicks</h5>
-        <span className="pull-right">
-          <span>
-            {date(createdAt)} By
-            <a href={"/profile/" + postedBy._id}>
-              <strong> {postedBy.username}</strong>
+        <div className="row d-flex justify-content-around">
+          <h6 className="text-danger">{clickCount} Clicks</h6>
+          <h6 className="text-primary">
+            <a onClick={() => handleLikeCount(_id)}>
+              <i className="far fa-thumbs-up">{likeCount}</i>
             </a>
-          </span>
-        </span>
+          </h6>
+        </div>
+
+        <div className="ml-auto pt-4">
+          {date(createdAt)} By
+          <a href={"/profile/" + postedBy._id}>
+            <strong> {postedBy.username}</strong>
+          </a>
+        </div>
       </div>
       <div className="col-md-12">
         <span className="badge text-dark">

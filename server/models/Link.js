@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
 const LinkSchema = new mongoose.Schema(
@@ -23,26 +23,27 @@ const LinkSchema = new mongoose.Schema(
     },
     postedBy: {
       type: ObjectId,
-      ref: 'User'
+      ref: "User"
     },
     categories: [
       {
         type: ObjectId,
-        ref: 'Category',
+        ref: "Category",
         required: true
       }
     ],
     type: {
       type: String,
-      default: 'Free'
+      default: "Free"
     },
     medium: {
       type: String,
-      default: 'Video'
+      default: "Video"
     },
-    clicks: { type: Number, default: 0 }
+    clicks: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 }
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Link', LinkSchema);
+module.exports = mongoose.model("Link", LinkSchema);

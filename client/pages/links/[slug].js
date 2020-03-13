@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import { API } from '../../config';
-import Layout from '../../components/Layout';
-import LinkComponent from '../../components/LinkComponent';
-import PopularLinks from '../../components/PopularLinks';
+import { API } from "../../config";
+import Layout from "../../components/Layout";
+import LinkComponent from "../../components/LinkComponent";
+import PopularLinks from "../../components/PopularLinks";
 
 const Links = ({ links, category, linksLimit }) => {
   const [allLinks, setAllLinks] = useState(links);
@@ -20,10 +20,6 @@ const Links = ({ links, category, linksLimit }) => {
   const loadPopular = async () => {
     const response = await axios.get(`${API}/links/popular/${category.slug}`);
     setPopular(response.data);
-  };
-
-  const handleClickCount = async _id => {
-    await axios.put(`${API}/click-count`, { _id });
   };
 
   const handleLoadMore = async () => {
@@ -62,14 +58,14 @@ const Links = ({ links, category, linksLimit }) => {
             <img
               src={category.image.url}
               alt={category.name}
-              style={{ width: 'auto', maxHeight: '120px' }}
+              style={{ width: "auto", maxHeight: "120px" }}
             />
           </div>
           <div className="col-md-10">
             <div
               className="lead alert alert-secondary p-0 m-0"
               style={{
-                backgroundColor: '#fcf8e3'
+                backgroundColor: "#fcf8e3"
               }}
             >
               <p className="m-2">{category.content}</p>
@@ -87,10 +83,7 @@ const Links = ({ links, category, linksLimit }) => {
             ) : (
               allLinks.map(link => (
                 <div className="row alert alert-info p-2" key={link._id}>
-                  <LinkComponent
-                    link={link}
-                    handleClickCount={handleClickCount}
-                  />
+                  <LinkComponent link={link} />
                 </div>
               ))
             )}
@@ -108,7 +101,7 @@ const Links = ({ links, category, linksLimit }) => {
               {popular &&
                 popular.map(link => (
                   <div className="row alert alert-warning r" key={link._id}>
-                    <PopularLinks link={link} handleClick={handleClickCount} />
+                    <PopularLinks link={link} />
                   </div>
                 ))}
             </div>

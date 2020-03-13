@@ -1,18 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 //Validator
-const { runValidation } = require('../validators');
+const { runValidation } = require("../validators");
 const {
   linkCreateValidator,
   linkUpdateValidator
-} = require('../validators/link');
+} = require("../validators/link");
 
 const {
   requireSignin,
   userMiddleware,
   adminMiddleware
-} = require('../controllers/authController');
+} = require("../controllers/authController");
 
 //Controller
 const {
@@ -24,35 +24,37 @@ const {
   clickCount,
   popular,
   popularInACategory,
-  list
-} = require('../controllers/linkController');
+  list,
+  likeCount
+} = require("../controllers/linkController");
 
 router.post(
-  '/link',
+  "/link",
   linkCreateValidator,
   runValidation,
   requireSignin,
   userMiddleware,
   create
 );
-router.get('/links', listAll);
-router.get('/link/:id', read);
+router.get("/links", listAll);
+router.get("/link/:id", read);
 router.put(
-  '/link/:id',
+  "/link/:id",
   linkUpdateValidator,
   runValidation,
   requireSignin,
   userMiddleware,
   update
 );
-router.delete('/link/:id', requireSignin, userMiddleware, remove);
-router.put('/click-count', clickCount);
+router.delete("/link/:id", requireSignin, userMiddleware, remove);
+router.put("/click-count", clickCount);
+router.put("/like-count", likeCount);
 
 //popular links
-router.get('/links/popular', popular);
-router.get('/links/popular/:slug', popularInACategory);
+router.get("/links/popular", popular);
+router.get("/links/popular/:slug", popularInACategory);
 
 // admin links
-router.post('/links', requireSignin, adminMiddleware, list);
+router.post("/links", requireSignin, adminMiddleware, list);
 
 module.exports = router;

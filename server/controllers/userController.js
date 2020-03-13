@@ -23,7 +23,7 @@ exports.read = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(5);
 
-    console.log(links);
+    // console.log(links);
 
     return res.status(200).json({ user, links });
   } catch (err) {

@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { API } from "../config";
 import date from "../utils/formatDate";
+import { isAuth } from "../helpers/auth";
 
 const LinkComponent = ({ link }) => {
   const {
@@ -15,21 +16,57 @@ const LinkComponent = ({ link }) => {
     medium,
     postedBy,
     categories,
-    likes
+    likes,
+    likeUsers
   } = link;
+
+  const initialIsLiked = isAuth() && likeUsers.indexOf(isAuth()._id) > -1;
 
   const [clickCount, setClickCount] = useState(clicks);
   const [likeCount, setLikeCount] = useState(likes);
+  const [isLiked, setIsLiked] = useState(initialIsLiked);
+
+  // Check to see if there is atoken or user logged in
+  let token;
+  if (process.browser) {
+    token = document.cookie.split("=")[1];
+  }
+
+  // set the like button based on like or unlike
+  let likeButton;
+  if (isLiked) {
+    likeButton = <i className="fas fa-thumbs-up">{likeCount}</i>;
+  } else if (isAuth() && !likeUsers.includes(isAuth._id)) {
+    likeButton = <i className="far fa-thumbs-up">{likeCount}</i>;
+  } else {
+    likeButton = <i className="far fa-thumbs-up">{likeCount}</i>;
+  }
 
   const handleClickCount = async _id => {
     const response = await axios.put(`${API}/click-count`, { _id });
     setClickCount(response.data.clicks);
   };
 
-  const handleLikeCount = async _id => {
-    const response = await axios.put(`${API}/like-count`, { _id });
-    setLikeCount(response.data.likes);
-  };
+  let handleLikeCount;
+  if (isAuth()) {
+    handleLikeCount = async _id => {
+      const response = await axios.put(
+        `${API}/like-count`,
+        { _id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      setLikeCount(response.data.likes);
+      setIsLiked(!isLiked);
+    };
+  } else {
+    handleLikeCount = () => {
+      alert("Please log in or register to like");
+    };
+  }
 
   return (
     <>
@@ -43,9 +80,7 @@ const LinkComponent = ({ link }) => {
         <div className="row d-flex justify-content-around">
           <h6 className="text-danger">{clickCount} Clicks</h6>
           <h6 className="text-primary">
-            <a onClick={() => handleLikeCount(_id)}>
-              <i className="far fa-thumbs-up">{likeCount}</i>
-            </a>
+            <a onClick={() => handleLikeCount(_id)}>{likeButton}</a>
           </h6>
         </div>
 

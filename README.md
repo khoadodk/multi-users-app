@@ -13,8 +13,10 @@ Tech stack: Next.js, Node.js, Express, MongoDB, AWS S3, AWS SES, AWS EC2, AWS Ro
 
 Todos:
 
-- Like feature to the links
+- <del>Like feature to the links</del>
 - <del>User's public profile</del>
+- Most like links
+- Search functionality
 - Google Login
 
 ### React - Front End

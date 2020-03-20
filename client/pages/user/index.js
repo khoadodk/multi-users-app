@@ -55,14 +55,18 @@ const User = ({ user, userLinks, token }) => {
                     <p className="pt-2">{link.url}</p>
                   </a>
                 </div>
-                <div className="col-md-4 pt-2 text-center">
-                  <h5 className="text-danger">{link.clicks} Clicks</h5>
-                  <span className="pull-right">
-                    <span>
-                      {date(link.createdAt)} By
-                      <strong> {link.postedBy.name}</strong>
-                    </span>
-                  </span>
+                <div className="col-md-4 pt-2">
+                  <div className="row d-flex justify-content-around">
+                    <h6 className="text-danger">{link.clicks} Clicks</h6>
+                    <h6 className="text-primary">{link.likes} Likes</h6>
+                  </div>
+
+                  <div className="ml-auto pt-2 text-center">
+                    {date(link.createdAt)} By
+                    <a href={"/profile/" + link.postedBy._id}>
+                      <strong> {link.postedBy.username}</strong>
+                    </a>
+                  </div>
                 </div>
 
                 {/* update */}

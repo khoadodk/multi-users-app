@@ -48,7 +48,7 @@ router.put(
 );
 router.delete("/link/:id", requireSignin, userMiddleware, remove);
 router.put("/click-count", clickCount);
-router.put("/like-count", likeCount);
+router.put("/like-count", requireSignin, userMiddleware, likeCount);
 
 //popular links
 router.get("/links/popular", popular);

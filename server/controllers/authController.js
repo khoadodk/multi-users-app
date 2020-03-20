@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
-const expressJWT = require('express-jwt');
-const AWS = require('aws-sdk');
-const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const expressJWT = require("express-jwt");
+const AWS = require("aws-sdk");
+const bcrypt = require("bcrypt");
 
-const { registerEmailParams, resetEmailParams } = require('../helpers/email');
-const User = require('../models/User');
+const { registerEmailParams, resetEmailParams } = require("../helpers/email");
+const User = require("../models/User");
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -12,7 +12,7 @@ AWS.config.update({
   region: process.env.AWS_REGION
 });
 
-const ses = new AWS.SES({ apiVersion: '2010-12-01' });
+const ses = new AWS.SES({ apiVersion: "2010-12-01" });
 
 //By default, the decoded token is attached to req.user
 exports.requireSignin = expressJWT({ secret: process.env.JWT_SECRET });
@@ -23,14 +23,14 @@ exports.userMiddleware = async (req, res, next) => {
     const user = await User.findOne({ _id });
     if (!user)
       res.status(422).json({
-        message: 'User is not found!'
+        message: "User is not found!"
       });
     //  pass user's info to profile
     req.profile = user;
     next();
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Access Denied!' });
+    res.status(500).json({ error: "Access Denied!" });
   }
 };
 
@@ -40,11 +40,11 @@ exports.adminMiddleware = async (req, res, next) => {
     const user = await User.findOne({ _id });
     if (!user) {
       res.status(422).json({
-        message: 'User is not found!'
+        message: "User is not found!"
       });
-    } else if (user.role !== 'admin' && user.role !== 'root') {
+    } else if (user.role !== "admin" && user.role !== "root") {
       res.status(422).json({
-        message: 'Admin resource! Access Denied'
+        message: "Admin resource! Access Denied"
       });
     } else {
       req.profile = user;
@@ -52,7 +52,7 @@ exports.adminMiddleware = async (req, res, next) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Access Denied!' });
+    res.status(500).json({ error: "Access Denied!" });
   }
 };
 
@@ -69,7 +69,7 @@ exports.register = async (req, res) => {
         { name, email, password, categories },
         process.env.JWT_ACCOUNT_ACTIVATION,
         {
-          expiresIn: '45m'
+          expiresIn: "45m"
         }
       );
       //   set up email and send out using AWS SES
@@ -87,7 +87,7 @@ exports.register = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Email address is not verified' });
+    res.status(500).json({ error: "Email address is not verified" });
   }
 };
 
@@ -104,7 +104,7 @@ exports.registerActivate = async (req, res) => {
     const user = await User.findOne({ email });
     if (user)
       return res.status(401).json({
-        error: 'Email already exists'
+        error: "Email already exists"
       });
     const newUser = new User({
       username: name,
@@ -116,13 +116,13 @@ exports.registerActivate = async (req, res) => {
 
     newUser.save();
     res.status(200).json({
-      message: 'Registration success! Please log in.'
+      message: "Registration success! Please log in."
     });
   } catch (error) {
     console.error(err);
     res
       .status(500)
-      .json({ error: 'Server error! Please sign up again later.' });
+      .json({ error: "Server error! Please sign up again later." });
   }
 };
 
@@ -133,17 +133,17 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(422).json({
-        error: 'User with that email does not exist. Please register!'
+        error: "User with that email does not exist. Please register!"
       });
     } else {
       if (!user.authenticate(password)) {
         return res.status(404).json({
-          error: 'Email and password do not match'
+          error: "Email and password do not match"
         });
       }
       // generate token and send to client
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '7d'
+        expiresIn: "7d"
       });
       const { _id, name, email, role, username } = user;
 
@@ -154,7 +154,7 @@ exports.login = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error! Please try again later.' });
+    res.status(500).json({ error: "Server error! Please try again later." });
   }
 };
 
@@ -164,12 +164,12 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(422).json({
-        error: 'The email does not exist'
+        error: "The email does not exist"
       });
     }
     const { name } = user;
     const token = jwt.sign({ name, email }, process.env.JWT_RESET_PASSWORD, {
-      expiresIn: '45m'
+      expiresIn: "45m"
     });
     //   set up email and send out using AWS SES
     const params = resetEmailParams(email, token);
@@ -185,7 +185,7 @@ exports.forgotPassword = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error! Please try again later.' });
+    res.status(500).json({ error: "Server error! Please try again later." });
   }
 };
 
@@ -206,10 +206,10 @@ exports.resetPassword = async (req, res) => {
       }
     );
     res.status(200).json({
-      message: 'Password updated successfully!'
+      message: "Password updated successfully!"
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error! Please try again later.' });
+    res.status(500).json({ error: "Server error! Please try again later." });
   }
 };

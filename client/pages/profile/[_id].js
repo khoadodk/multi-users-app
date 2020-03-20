@@ -8,14 +8,6 @@ import LinkComponent from "../../components/LinkComponent";
 const ProfilePage = ({ user, statusCode, links }) => {
   const { role, username, createdAt } = user;
 
-  const handleClickCount = async _id => {
-    await axios.put(`${API}/click-count`, { _id });
-  };
-
-  const handleLikeCount = async _id => {
-    await axios.put(`${API}/like-count`, { _id });
-  };
-
   if (statusCode === 404) {
     return (
       <Layout>
@@ -52,11 +44,7 @@ const ProfilePage = ({ user, statusCode, links }) => {
         {links &&
           links.map(link => (
             <div className="row alert alert-info mb-0 mt-2" key={link._id}>
-              <LinkComponent
-                link={link}
-                handleClickCount={handleClickCount}
-                handleLikeCount={handleLikeCount}
-              />
+              <LinkComponent link={link} />
             </div>
           ))}
       </div>
@@ -69,7 +57,7 @@ ProfilePage.getInitialProps = async ({ query }) => {
   if (!data) {
     return { statusCode: 404 };
   }
-  console.log(data);
+  // console.log(data);
   return { user: data.user, links: data.links };
 };
 

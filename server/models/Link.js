@@ -41,7 +41,13 @@ const LinkSchema = new mongoose.Schema(
       default: "Video"
     },
     clicks: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 }
+    likes: { type: Number, default: 0 },
+    likeUsers: [
+      {
+        type: ObjectId,
+        ref: "User"
+      }
+    ]
   },
   { timestamps: true }
 );

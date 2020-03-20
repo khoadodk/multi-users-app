@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import Layout from '../../components/Layout';
-import withAdmin from '../withAdmin';
-import Profile from '../../components/Profile';
+import Layout from "../../components/Layout";
+import withAdmin from "../withAdmin";
+import Profile from "../../components/Profile";
 
 const Admin = ({ user }) => {
-  console.log(user);
+  // console.log(user);
 
   return (
     <Layout>

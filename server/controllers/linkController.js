@@ -64,14 +64,32 @@ exports.clickCount = async (req, res) => {
 };
 
 exports.likeCount = async (req, res) => {
+  // 1. Find the link
+  // 2. Check existing user
+  // 3. If user liked the link, pop the likeUsers and decrease like by 1
+  // 4. else push the id into the likeUsers, increase like by 1
   try {
-    const { _id } = req.body;
-    const updatedClick = await Link.findByIdAndUpdate(
-      { _id },
-      { $inc: { likes: 1 } },
-      { new: true }
-    );
-    res.status(200).json(updatedClick);
+    let link = await Link.findById(req.body._id);
+    let index = link.likeUsers.indexOf(req.user._id);
+    if (index > -1) {
+      link.likeUsers.splice(index, 1);
+      link.likes--;
+      link.save();
+      res.status(200).json(link);
+    } else {
+      link.likeUsers.push(req.user._id);
+      link.likes++;
+      link.save();
+      res.status(200).json(link);
+    }
+
+    // const { _id } = req.body;
+    // const updatedClick = await Link.findByIdAndUpdate(
+    //   { _id },
+    //   { $inc: { likes: 1 } },
+    //   { new: true }
+    // );
+    // res.status(200).json(link);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error! Please try again later." });

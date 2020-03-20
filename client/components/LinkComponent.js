@@ -26,20 +26,16 @@ const LinkComponent = ({ link }) => {
   const [likeCount, setLikeCount] = useState(likes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
+  // set the like button based on like or unlike
+  let likeButton;
+  isLiked
+    ? (likeButton = <i className="fas fa-thumbs-up">&nbsp;{likeCount}</i>)
+    : (likeButton = <i className="far fa-thumbs-up">&nbsp;{likeCount}</i>);
+
   // Check to see if there is atoken or user logged in
   let token;
   if (process.browser) {
     token = document.cookie.split("=")[1];
-  }
-
-  // set the like button based on like or unlike
-  let likeButton;
-  if (isLiked) {
-    likeButton = <i className="fas fa-thumbs-up">{likeCount}</i>;
-  } else if (isAuth() && !likeUsers.includes(isAuth._id)) {
-    likeButton = <i className="far fa-thumbs-up">{likeCount}</i>;
-  } else {
-    likeButton = <i className="far fa-thumbs-up">{likeCount}</i>;
   }
 
   const handleClickCount = async _id => {
@@ -65,6 +61,7 @@ const LinkComponent = ({ link }) => {
   } else {
     handleLikeCount = () => {
       alert("Please log in or register to like");
+      setIsLiked(false);
     };
   }
 
